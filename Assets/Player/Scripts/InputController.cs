@@ -1,18 +1,28 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InputController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Vector2EventChannelSO moveEventChannel;
+    [SerializeField] private Vector2EventChannelSO lookEventChannel;
+
+    public void OnMoveInput(InputAction.CallbackContext context)
     {
-        
+        Vector2 moveInput = Vector2.zero;
+
+        if (context.phase == InputActionPhase.Performed)
+            moveInput = context.ReadValue<Vector2>();
+
+        moveEventChannel.Raise(moveInput);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnLookInput(InputAction.CallbackContext context)
     {
+        Vector2 mouseDelta = context.ReadValue<Vector2>();
         
+        lookEventChannel.Raise(mouseDelta);
     }
 }
