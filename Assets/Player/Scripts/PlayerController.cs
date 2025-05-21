@@ -16,6 +16,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] private VoidEventChannelSO jumpEventChannel;
     [SerializeField] private float jumpForce = 5f;
+    
+    [Header("Gravity Tuning")]
+    [SerializeField] private float fallMultiplier = 2.5f;
+    [SerializeField] private float lowJumpMultiplier = 2f;
 
     private Vector2 _currentMovementInput;
     private Vector3 _moveDirection;
@@ -37,12 +41,13 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
+        _isGrounded = IsGrounded();
         Look();
+        ApplyExtraGravity();
     }
 
     private void Update()
     {
-        _isGrounded = IsGrounded();
         CalculateMoveDirection();
     }
 
@@ -106,5 +111,17 @@ public class PlayerController : MonoBehaviour
         Vector3 point2 = new Vector3(center.x, bottomY - epsilon, center.z);
 
         return Physics.CheckCapsule(point1, point2, collider.radius, groundLayerMask);
+    }
+    
+    private void ApplyExtraGravity()
+    {
+        if (_rigidbody.velocity.y < 0)
+        {
+            _rigidbody.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
+        }
+        else if (_rigidbody.velocity.y > 0 && !Input.GetButton("Jump"))
+        {
+            _rigidbody.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
+        }
     }
 }
