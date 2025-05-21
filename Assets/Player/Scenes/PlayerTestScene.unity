@@ -350,6 +350,7 @@ MonoBehaviour:
   moveEventChannel: {fileID: 11400000, guid: 487ee7ca13db3a1438e481a0d12ee466, type: 2}
   lookEventChannel: {fileID: 11400000, guid: 9a7b9390616822041ac7eb60da59bb23, type: 2}
   jumpEventChannel: {fileID: 11400000, guid: b418b5adcda4e114788da7886ce626e8, type: 2}
+  jumpHeldEventChennel: {fileID: 11400000, guid: e287683773d349741b4465cf7e82a3bc, type: 2}
 --- !u!4 &645633554
 Transform:
   m_ObjectHideFlags: 0
@@ -484,6 +485,8 @@ GameObject:
   - component: {fileID: 714269134}
   - component: {fileID: 714269138}
   - component: {fileID: 714269137}
+  - component: {fileID: 714269140}
+  - component: {fileID: 714269139}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -579,7 +582,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   jumpEventChannel: {fileID: 11400000, guid: b418b5adcda4e114788da7886ce626e8, type: 2}
-  jumpForce: 300
+  jumpHeldEventChannel: {fileID: 11400000, guid: e287683773d349741b4465cf7e82a3bc, type: 2}
+  fallDurationEventChannel: {fileID: 11400000, guid: aefc003346b00334ea1f662d217643f0, type: 2}
+  jumpForce: 500
+  fallMultiplier: 3
+  lowJumpMultiplier: 2
 --- !u!114 &714269138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -658,6 +665,35 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &714269139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714269133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad02e080b73bd614986b1641d0f188cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fallDurationEventChannel: {fileID: 11400000, guid: aefc003346b00334ea1f662d217643f0, type: 2}
+  fallThreshold: 1
+  damagePerSecond: 10
+--- !u!114 &714269140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714269133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfe4fa838a7dd4e42a99d0e1d76cc2f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseStat: {fileID: 11400000, guid: 28d3b6a4df83f5447ab0046cce39a07d, type: 2}
+  damageEventChannel: {fileID: 11400000, guid: b55dc92ff7fa21949b5536db7708cc40, type: 2}
 --- !u!1 &1135041184
 GameObject:
   m_ObjectHideFlags: 0
@@ -1020,8 +1056,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookEventChannel: {fileID: 11400000, guid: 9a7b9390616822041ac7eb60da59bb23, type: 2}
-  mouseSensitivity: 1
-  rotationSpeed: 2
+  mouseSensitivity: 1.5
+  rotationSpeed: 3
   player: {fileID: 714269136}
 --- !u!1 &1973676596
 GameObject:
