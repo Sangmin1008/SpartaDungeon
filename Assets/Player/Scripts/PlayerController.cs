@@ -119,9 +119,5 @@ public class PlayerController : MonoBehaviour
         {
             _rigidbody.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
         }
-        else if (_rigidbody.velocity.y > 0 && !Input.GetButton("Jump"))
-        {
-            _rigidbody.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
-        }
     }
 }
