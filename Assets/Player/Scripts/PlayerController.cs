@@ -8,13 +8,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody _rigidbody;
     
     [SerializeField] private Vector2EventChannelSO moveEventChannel;
-    [SerializeField] private Vector2EventChannelSO lookEventChannel;
-
-    [SerializeField] private Transform cameraContainer;
     [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float lookSensitivity = 5f;
+
+    [SerializeField] private Transform camera;
+    [SerializeField] private float rotationSpeed = 10f;
 
     private Vector2 _currentMovementInput;
+    private Vector3 _moveDirection;
     private Vector2 _mouseDelta;
     private float _yaw;
     private float _pitch;
@@ -22,23 +22,22 @@ public class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         moveEventChannel.OnEventRaised += OnMoveInput;
-        lookEventChannel.OnEventRaised += OnLookInput;
     }
 
     private void OnDisable()
     {
         moveEventChannel.OnEventRaised -= OnMoveInput;
-        lookEventChannel.OnEventRaised -= OnLookInput;
     }
 
     private void FixedUpdate()
     {
         Move();
+        Look();
     }
 
-    private void LateUpdate()
+    private void Update()
     {
-        Look();
+        CalculateMoveDirection();
     }
 
     private void OnMoveInput(Vector2 input)
@@ -46,26 +45,35 @@ public class PlayerController : MonoBehaviour
         _currentMovementInput = input;
     }
 
-    private void OnLookInput(Vector2 input)
+    void CalculateMoveDirection()
     {
-        _mouseDelta = input;
+        Vector2 movementInput = _currentMovementInput;
+        Vector3 cameraForward = camera.transform.forward;
+        Vector3 cameraRight = camera.transform.right;
+
+        cameraForward.y = 0f;
+        cameraRight.y = 0f;
+
+        cameraForward.Normalize();
+        cameraRight.Normalize();
+
+        _moveDirection = (cameraForward * movementInput.y + cameraRight * movementInput.x).normalized;
     }
 
-    private void Move()
+    void Move()
     {
-        Vector3 direction = transform.forward * _currentMovementInput.y + transform.right * _currentMovementInput.x;
-        direction *= moveSpeed;
-        direction.y = _rigidbody.velocity.y;
-
-        _rigidbody.velocity = direction;
+        Vector3 targetVelocity = _moveDirection * moveSpeed;
+        Vector3 velocityDiff = targetVelocity - _rigidbody.velocity;
+        velocityDiff.y = 0f;
+        _rigidbody.AddForce(velocityDiff, ForceMode.VelocityChange);
     }
 
-    private void Look()
+    void Look()
     {
-        _yaw += _mouseDelta.x * lookSensitivity * Time.deltaTime;
-        _pitch -= _mouseDelta.y * lookSensitivity * Time.deltaTime;
-        _pitch = Mathf.Clamp(_pitch, -80f, 80f);
-
-        cameraContainer.rotation = Quaternion.Euler(_pitch, _yaw, 0f);
+        if (_moveDirection.sqrMagnitude > 0.01f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(_moveDirection);
+            _rigidbody.MoveRotation(Quaternion.Slerp(_rigidbody.rotation, targetRotation, rotationSpeed * Time.deltaTime));
+        }
     }
 }
