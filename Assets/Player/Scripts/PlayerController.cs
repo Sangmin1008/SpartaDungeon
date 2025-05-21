@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] private VoidEventChannelSO jumpEventChannel;
+    [SerializeField] private BoolEventChannelSO jumpHeldEventChannel;
+    [SerializeField] private FloatEventChannelSO fallDurationEventChannel;
     [SerializeField] private float jumpForce = 5f;
     
     [Header("Gravity Tuning")]
@@ -25,23 +27,28 @@ public class PlayerController : MonoBehaviour
     private Vector3 _moveDirection;
     private Vector2 _mouseDelta;
     private bool _isGrounded;
+    private bool _isJumpHeld;
+    private bool _wasGrounded = true;
+    private float _fallStartTime;
     
     private void Start()
     {
         moveEventChannel.OnEventRaised += OnMoveInput;
         jumpEventChannel.OnEventRaised += OnJumpInput;
+        jumpHeldEventChannel.OnEventRaised += OnJumpHeldChanged;
     }
 
     private void OnDestroy()
     {
         moveEventChannel.OnEventRaised -= OnMoveInput;
         jumpEventChannel.OnEventRaised -= OnJumpInput;
+        jumpHeldEventChannel.OnEventRaised -= OnJumpHeldChanged;
     }
 
     private void FixedUpdate()
     {
+        CheckGround();
         Move();
-        _isGrounded = IsGrounded();
         Look();
         ApplyExtraGravity();
     }
@@ -66,6 +73,11 @@ public class PlayerController : MonoBehaviour
 
             _rigidbody.AddForce(transform.up * jumpForce , ForceMode.Impulse);
         }
+    }
+    
+    private void OnJumpHeldChanged(bool isHeld)
+    {
+        _isJumpHeld = isHeld;
     }
 
     void CalculateMoveDirection()
@@ -99,6 +111,23 @@ public class PlayerController : MonoBehaviour
             _rigidbody.MoveRotation(Quaternion.Slerp(_rigidbody.rotation, targetRotation, rotationSpeed * Time.deltaTime));
         }
     }
+
+    void CheckGround()
+    {
+        _isGrounded = IsGrounded();
+        if (!_wasGrounded && _isGrounded)
+        {
+            float airTime = Time.time - _fallStartTime;
+            fallDurationEventChannel.Raise(airTime);
+        }
+
+        if (_wasGrounded && !_isGrounded)
+        {
+            _fallStartTime = Time.time;
+        }
+
+        _wasGrounded = _isGrounded;
+    }
     
     bool IsGrounded()
     {
@@ -118,6 +147,10 @@ public class PlayerController : MonoBehaviour
         if (_rigidbody.velocity.y < 0)
         {
             _rigidbody.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
+        }
+        else if (_rigidbody.velocity.y > 0 && !_isJumpHeld)
+        {
+            _rigidbody.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
         }
     }
 }

@@ -6,8 +6,8 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private Vector2EventChannelSO lookEventChannel;
-    [SerializeField] private float mouseSensitivity = 2f;
-    [SerializeField] private float rotationSpeed = 5f;
+    [SerializeField] private float mouseSensitivity = 1.5f;
+    [SerializeField] private float rotationSpeed = 3f;
     [SerializeField] private Transform player;
     
     private Vector3 _offset = new Vector3(0, 10, -15);
@@ -40,7 +40,7 @@ public class CameraController : MonoBehaviour
         _targetAngle += mouseX * mouseSensitivity;
         float angleDifference = Mathf.DeltaAngle(_currentAngle, _targetAngle);
 
-        _currentAngle += angleDifference * rotationSpeed * Time.deltaTime;
+        _currentAngle += angleDifference * rotationSpeed * Time.deltaTime * 3;
 
         _currentAngle = NormalizeAngle(_currentAngle);
         _targetAngle = NormalizeAngle(_targetAngle);
@@ -48,7 +48,7 @@ public class CameraController : MonoBehaviour
         Quaternion rotation = Quaternion.Euler(0, _currentAngle, 0);
         Vector3 rotatedOffset = rotation * _offset;
 
-        transform.position = Vector3.Lerp(transform.position, player.transform.position + rotatedOffset, Time.deltaTime * 10f);
+        transform.position = player.transform.position + rotatedOffset;
         transform.rotation = Quaternion.Euler(Mathf.Rad2Deg * Mathf.Atan2(1, 2), _currentAngle, 0);
     }
     
