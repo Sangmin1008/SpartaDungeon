@@ -115,7 +115,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 7096748003119418203, guid: 19b967e9d39f9514ab33b9a7d4aeb951, type: 3}
         m_TargetAssemblyTypeName: InputController, Assembly-CSharp
         m_MethodName: OnMoveInput
         m_Mode: 0
@@ -131,7 +131,7 @@ MonoBehaviour:
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 7096748003119418203, guid: 19b967e9d39f9514ab33b9a7d4aeb951, type: 3}
         m_TargetAssemblyTypeName: InputController, Assembly-CSharp
         m_MethodName: OnLookInput
         m_Mode: 0
@@ -147,7 +147,7 @@ MonoBehaviour:
     m_ActionName: Player/Look[/Mouse/delta]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 7096748003119418203, guid: 19b967e9d39f9514ab33b9a7d4aeb951, type: 3}
         m_TargetAssemblyTypeName: InputController, Assembly-CSharp
         m_MethodName: OnJumpInput
         m_Mode: 0
