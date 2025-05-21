@@ -248,6 +248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveEventChannel: {fileID: 11400000, guid: 487ee7ca13db3a1438e481a0d12ee466, type: 2}
   lookEventChannel: {fileID: 11400000, guid: 9a7b9390616822041ac7eb60da59bb23, type: 2}
+  jumpEventChannel: {fileID: 11400000, guid: b418b5adcda4e114788da7886ce626e8, type: 2}
 --- !u!4 &645633554
 Transform:
   m_ObjectHideFlags: 0
@@ -275,7 +276,7 @@ GameObject:
   - component: {fileID: 704953646}
   - component: {fileID: 704953645}
   - component: {fileID: 704953644}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -468,10 +469,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 714269134}
+  collider: {fileID: 714269135}
+  camera: {fileID: 1629119402}
   moveEventChannel: {fileID: 11400000, guid: 487ee7ca13db3a1438e481a0d12ee466, type: 2}
   moveSpeed: 10
-  camera: {fileID: 1629119402}
   rotationSpeed: 10
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  jumpEventChannel: {fileID: 11400000, guid: b418b5adcda4e114788da7886ce626e8, type: 2}
+  jumpForce: 5
 --- !u!114 &714269138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -530,7 +537,19 @@ MonoBehaviour:
     m_ActionId: 70f60485-7444-4956-b7e4-da3ddbdd6e19
     m_ActionName: Player/Look[/Mouse/delta]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 645633553}
+        m_TargetAssemblyTypeName: InputController, Assembly-CSharp
+        m_MethodName: OnJumpInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 110551cf-3d18-418a-abdb-dfd97d608bf5
     m_ActionName: Player/Jump[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
