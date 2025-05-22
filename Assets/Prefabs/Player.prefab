@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2835276201822519678}
   - component: {fileID: 3268000105952724276}
   - component: {fileID: 4728190441237236379}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 7096748003119418203, guid: 19b967e9d39f9514ab33b9a7d4aeb951, type: 3}
         m_TargetAssemblyTypeName: InputController, Assembly-CSharp
         m_MethodName: OnMoveInput
         m_Mode: 0
@@ -131,7 +131,7 @@ MonoBehaviour:
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 7096748003119418203, guid: 19b967e9d39f9514ab33b9a7d4aeb951, type: 3}
         m_TargetAssemblyTypeName: InputController, Assembly-CSharp
         m_MethodName: OnLookInput
         m_Mode: 0
@@ -147,7 +147,7 @@ MonoBehaviour:
     m_ActionName: Player/Look[/Mouse/delta]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 7096748003119418203, guid: 19b967e9d39f9514ab33b9a7d4aeb951, type: 3}
         m_TargetAssemblyTypeName: InputController, Assembly-CSharp
         m_MethodName: OnJumpInput
         m_Mode: 0
@@ -207,6 +207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseStat: {fileID: 11400000, guid: 28d3b6a4df83f5447ab0046cce39a07d, type: 2}
   damageEventChannel: {fileID: 11400000, guid: b55dc92ff7fa21949b5536db7708cc40, type: 2}
+  cureEventChannel: {fileID: 11400000, guid: 0fd1e3ea1b612694fb1d3219e57de59c, type: 2}
 --- !u!114 &4728190441237236379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,7 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fallDurationEventChannel: {fileID: 11400000, guid: aefc003346b00334ea1f662d217643f0, type: 2}
-  fallThreshold: 1
+  fallThreshold: 3
   damagePerSecond: 10
 --- !u!1 &4599488436340924790
 GameObject:
@@ -233,7 +234,7 @@ GameObject:
   - component: {fileID: 3633329655501634006}
   - component: {fileID: 6200880865916349037}
   - component: {fileID: 7510402944536155383}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}

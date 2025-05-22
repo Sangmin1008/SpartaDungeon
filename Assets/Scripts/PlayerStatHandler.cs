@@ -7,6 +7,7 @@ public class PlayerStatHandler : MonoBehaviour, IDamageable
 {
     [SerializeField] private StatDataSO baseStat;
     [SerializeField] private FloatEventChannelSO damageEventChannel;
+    [SerializeField] private FloatEventChannelSO cureEventChannel;
 
     private float _currentHealth;
     public float CurrentHealth
@@ -18,11 +19,13 @@ public class PlayerStatHandler : MonoBehaviour, IDamageable
     {
         _currentHealth = baseStat.maxHealth;
         damageEventChannel.OnEventRaised += TakeDamage;
+        cureEventChannel.OnEventRaised += TakeHealing;
     }
 
     private void OnDestroy()
     {
         damageEventChannel.OnEventRaised -= TakeDamage;
+        cureEventChannel.OnEventRaised -= TakeHealing;
     }
 
 
@@ -35,6 +38,12 @@ public class PlayerStatHandler : MonoBehaviour, IDamageable
         {
             Die();
         }
+    }
+
+    public void TakeHealing(float amount)
+    {
+        _currentHealth += amount;
+        _currentHealth = Mathf.Min(baseStat.maxHealth, _currentHealth);
     }
 
     private void Die()
