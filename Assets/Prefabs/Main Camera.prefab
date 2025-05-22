@@ -106,6 +106,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookEventChannel: {fileID: 11400000, guid: 9a7b9390616822041ac7eb60da59bb23, type: 2}
-  mouseSensitivity: 0.5
-  rotationSpeed: 1
+  mouseSensitivity: 1
+  rotationSpeed: 2
   player: {fileID: 0}

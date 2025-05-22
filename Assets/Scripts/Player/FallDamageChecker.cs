@@ -6,14 +6,12 @@ using UnityEngine;
 public class FallDamageChecker : MonoBehaviour
 {
     [SerializeField] private FloatEventChannelSO fallDurationEventChannel;
+    [SerializeField] private FloatEventChannelSO damageEventChannel;
     [SerializeField] private float fallThreshold = 2.0f;
     [SerializeField] private float damagePerSecond = 30f;
     
-    private IDamageable _damageable;
-
     private void Start()
     {
-        _damageable = GetComponent<IDamageable>();
         fallDurationEventChannel.OnEventRaised += OnFallDurationReceived;
     }
 
@@ -27,7 +25,7 @@ public class FallDamageChecker : MonoBehaviour
         if (airTime > fallThreshold)
         {
             float damage = (airTime - fallThreshold) * damagePerSecond;
-            _damageable.TakeDamage(damage);
+            damageEventChannel.Raise(damage);
         }
     }
 }

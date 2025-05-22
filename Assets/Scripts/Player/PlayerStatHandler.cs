@@ -14,10 +14,14 @@ public class PlayerStatHandler : MonoBehaviour, IDamageable
     {
         get { return _currentHealth; }
     }
-    
-    private void Start()
+
+    private void Awake()
     {
         _currentHealth = baseStat.maxHealth;
+    }
+
+    private void Start()
+    {
         damageEventChannel.OnEventRaised += TakeDamage;
         cureEventChannel.OnEventRaised += TakeHealing;
     }

@@ -189,6 +189,7 @@ MonoBehaviour:
     m_Bits: 64
   jumpEventChannel: {fileID: 11400000, guid: b418b5adcda4e114788da7886ce626e8, type: 2}
   jumpHeldEventChannel: {fileID: 11400000, guid: e287683773d349741b4465cf7e82a3bc, type: 2}
+  jumpInAirEventChannel: {fileID: 11400000, guid: 374b7e6bf902c6e46aca0bb741b2a461, type: 2}
   fallDurationEventChannel: {fileID: 11400000, guid: aefc003346b00334ea1f662d217643f0, type: 2}
   jumpForce: 500
   fallMultiplier: 3
@@ -221,6 +222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fallDurationEventChannel: {fileID: 11400000, guid: aefc003346b00334ea1f662d217643f0, type: 2}
+  damageEventChannel: {fileID: 11400000, guid: b55dc92ff7fa21949b5536db7708cc40, type: 2}
   fallThreshold: 3
   damagePerSecond: 10
 --- !u!1 &4599488436340924790
