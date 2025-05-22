@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f05556517e953d1479cbae14a106a8af, type: 3}
+  m_Name: HealthItemData
+  m_EditorClassIdentifier: 
+  itemName: HP UP
+  icon: {fileID: 0}
+  description: "hp\uB97C 30 \uD68C\uBCF5\uC2DC\uCF1C\uC90C"
+  prefab: {fileID: 6347776344390880627, guid: bb01d2948a20f8e40b6041ccc374421e, type: 3}
+  hpValue: 30
