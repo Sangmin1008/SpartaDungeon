@@ -39,8 +39,8 @@ public class CameraController : MonoBehaviour
     private void CameraRotation()
     {
         _angle += _mouseX * mouseSensitivity;
-        _pitch -= _mouseY * mouseSensitivity * 0.5f;
-        _pitch = Mathf.Clamp(_pitch, -90f, 90f);
+        _pitch -= _mouseY * mouseSensitivity * 0.7f;
+        _pitch = Mathf.Clamp(_pitch, -89f, 89f);
 
         _angle = NormalizeAngle(_angle);
 

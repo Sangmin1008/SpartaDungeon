@@ -47,4 +47,5 @@ MonoBehaviour:
   moveEventChannel: {fileID: 11400000, guid: 487ee7ca13db3a1438e481a0d12ee466, type: 2}
   lookEventChannel: {fileID: 11400000, guid: 9a7b9390616822041ac7eb60da59bb23, type: 2}
   jumpEventChannel: {fileID: 11400000, guid: b418b5adcda4e114788da7886ce626e8, type: 2}
-  jumpHeldEventChennel: {fileID: 11400000, guid: e287683773d349741b4465cf7e82a3bc, type: 2}
+  jumpHeldEventChannel: {fileID: 11400000, guid: e287683773d349741b4465cf7e82a3bc, type: 2}
+  interactEventChannel: {fileID: 11400000, guid: d570420c4949a1949bc28387f8dcb241, type: 2}

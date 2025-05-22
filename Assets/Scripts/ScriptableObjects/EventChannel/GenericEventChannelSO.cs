@@ -5,4 +5,8 @@ public class GenericEventChannelSO<T> : ScriptableObject
 {
     public event UnityAction<T> OnEventRaised;
     public void Raise(T data) => OnEventRaised?.Invoke(data);
+    public void Clear()
+    {
+        OnEventRaised = null;
+    }
 }

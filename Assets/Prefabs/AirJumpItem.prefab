@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5042324497540314660}
   - component: {fileID: 6993813138030082057}
   - component: {fileID: 1096087112223899775}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AirJumpItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}

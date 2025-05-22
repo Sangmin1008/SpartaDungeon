@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2835276201822519678}
   - component: {fileID: 3268000105952724276}
   - component: {fileID: 4728190441237236379}
+  - component: {fileID: 4170556977405805633}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -85,7 +86,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &4930627391493257797
@@ -161,6 +162,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 110551cf-3d18-418a-abdb-dfd97d608bf5
     m_ActionName: Player/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: InputController, Assembly-CSharp
+        m_MethodName: OnInteractInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 46d7a9d0-c32a-42fc-8aa4-1c24829030fc
+    m_ActionName: Player/Interaction[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -225,6 +242,27 @@ MonoBehaviour:
   damageEventChannel: {fileID: 11400000, guid: b55dc92ff7fa21949b5536db7708cc40, type: 2}
   fallThreshold: 3
   damagePerSecond: 10
+--- !u!114 &4170556977405805633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2178992407989920515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d7d7be19cbd4404890e7b5ede64b887, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactEventChannel: {fileID: 11400000, guid: d570420c4949a1949bc28387f8dcb241, type: 2}
+  checkRate: 0.05
+  maxCheckDistance: 3
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  currInteractGameObject: {fileID: 0}
+  pannel: {fileID: 0}
+  promptText: {fileID: 0}
 --- !u!1 &4599488436340924790
 GameObject:
   m_ObjectHideFlags: 0

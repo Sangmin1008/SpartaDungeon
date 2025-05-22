@@ -9,7 +9,8 @@ public class InputController : MonoBehaviour
     [SerializeField] private Vector2EventChannelSO moveEventChannel;
     [SerializeField] private Vector2EventChannelSO lookEventChannel;
     [SerializeField] private VoidEventChannelSO jumpEventChannel;
-    [SerializeField] private BoolEventChannelSO jumpHeldEventChennel;
+    [SerializeField] private BoolEventChannelSO jumpHeldEventChannel;
+    [SerializeField] private VoidEventChannelSO interactEventChannel;
     
     public void OnMoveInput(InputAction.CallbackContext context)
     {
@@ -32,12 +33,20 @@ public class InputController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
-            jumpHeldEventChennel.Raise(true);
+            jumpHeldEventChannel.Raise(true);
             jumpEventChannel.Raise();
         }
         else if (context.phase == InputActionPhase.Canceled)
         {
-            jumpHeldEventChennel.Raise(false);
+            jumpHeldEventChannel.Raise(false);
+        }
+    }
+    
+    public void OnInteractInput(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            interactEventChannel?.Raise();
         }
     }
 }

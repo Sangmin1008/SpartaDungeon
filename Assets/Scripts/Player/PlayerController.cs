@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         moveEventChannel.OnEventRaised += OnMoveInput;
         jumpEventChannel.OnEventRaised += OnJumpInput;
         jumpHeldEventChannel.OnEventRaised += OnJumpHeldChanged;

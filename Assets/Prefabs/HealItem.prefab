@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8936063127627151674}
   - component: {fileID: 3075152212336124754}
   - component: {fileID: 3302771381373490127}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8050258940806540001}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HealItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}

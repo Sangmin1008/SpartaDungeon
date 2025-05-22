@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bb854a944af23e4bb4fcd31870bf455, type: 3}
   m_Name: AirJumpItemData
   m_EditorClassIdentifier: 
+  itemName: Air Jump Item
+  description: time +10
   airJumpDuration: 10
