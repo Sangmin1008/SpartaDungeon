@@ -7,13 +7,13 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField] private Vector2EventChannelSO lookEventChannel;
     [SerializeField] private float mouseSensitivity = 1.5f;
-    [SerializeField] private float rotationSpeed = 3f;
     [SerializeField] private Transform player;
     
-    private Vector3 _offset = new Vector3(0, 10, -15);
-    private float mouseX = 0f;
-    private float _targetAngle = 0f;
-    private float _currentAngle = 0f;
+    private Vector3 _offset = new Vector3(0, 0.6f, 0);
+    private float _mouseX = 0f;
+    private float _mouseY = 0f;
+    private float _angle = 0f; // 좌우 회전 각도 (요)
+    private float _pitch = 0f; // 상하 회전 각도 (피치)
 
     private void OnEnable()
     {
@@ -25,31 +25,27 @@ public class CameraController : MonoBehaviour
         lookEventChannel.OnEventRaised -= OnLookInput;
     }
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
         CameraRotation();
     }
 
     private void OnLookInput(Vector2 delta)
     {
-        mouseX = Mathf.Clamp(delta.x, -5f, 5f);
+        _mouseX = delta.x;
+        _mouseY = delta.y;
     }
 
     private void CameraRotation()
     {
-        _targetAngle += mouseX * mouseSensitivity;
-        float angleDifference = Mathf.DeltaAngle(_currentAngle, _targetAngle);
+        _angle += _mouseX * mouseSensitivity;
+        _pitch -= _mouseY * mouseSensitivity * 0.5f;
+        _pitch = Mathf.Clamp(_pitch, -90f, 90f);
 
-        _currentAngle += angleDifference * rotationSpeed * Time.deltaTime * 3;
+        _angle = NormalizeAngle(_angle);
 
-        _currentAngle = NormalizeAngle(_currentAngle);
-        _targetAngle = NormalizeAngle(_targetAngle);
-        
-        Quaternion rotation = Quaternion.Euler(0, _currentAngle, 0);
-        Vector3 rotatedOffset = rotation * _offset;
-
-        transform.position = player.transform.position + rotatedOffset;
-        transform.rotation = Quaternion.Euler(Mathf.Rad2Deg * Mathf.Atan2(1, 2), _currentAngle, 0);
+        transform.position = player.position + _offset;
+        transform.rotation = Quaternion.Euler(_pitch, _angle, 0);
     }
     
     private float NormalizeAngle(float angle)
