@@ -207,6 +207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseStat: {fileID: 11400000, guid: 28d3b6a4df83f5447ab0046cce39a07d, type: 2}
   damageEventChannel: {fileID: 11400000, guid: b55dc92ff7fa21949b5536db7708cc40, type: 2}
+  cureEventChannel: {fileID: 11400000, guid: 0fd1e3ea1b612694fb1d3219e57de59c, type: 2}
 --- !u!114 &4728190441237236379
 MonoBehaviour:
   m_ObjectHideFlags: 0
