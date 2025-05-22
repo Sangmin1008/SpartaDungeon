@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] private VoidEventChannelSO jumpEventChannel;
     [SerializeField] private BoolEventChannelSO jumpHeldEventChannel;
+    [SerializeField] private FloatEventChannelSO jumpInAirEventChannel;
     [SerializeField] private FloatEventChannelSO fallDurationEventChannel;
     [SerializeField] private float jumpForce = 5f;
     
@@ -30,12 +31,14 @@ public class PlayerController : MonoBehaviour
     private bool _isJumpHeld;
     private bool _wasGrounded = true;
     private float _fallStartTime;
+    private float _canJumpInAirDuration = 0f;
     
     private void Start()
     {
         moveEventChannel.OnEventRaised += OnMoveInput;
         jumpEventChannel.OnEventRaised += OnJumpInput;
         jumpHeldEventChannel.OnEventRaised += OnJumpHeldChanged;
+        jumpInAirEventChannel.OnEventRaised += SetCanJumpInAir;
     }
 
     private void OnDestroy()
@@ -43,6 +46,7 @@ public class PlayerController : MonoBehaviour
         moveEventChannel.OnEventRaised -= OnMoveInput;
         jumpEventChannel.OnEventRaised -= OnJumpInput;
         jumpHeldEventChannel.OnEventRaised -= OnJumpHeldChanged;
+        jumpInAirEventChannel.OnEventRaised -= SetCanJumpInAir;
     }
 
     private void FixedUpdate()
@@ -65,7 +69,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnJumpInput()
     {
-        if (_isGrounded)
+        if (_isGrounded || _canJumpInAirDuration > 0f)
         {
             Vector3 velocity = _rigidbody.velocity;
             velocity.y = 0;
@@ -93,6 +97,25 @@ public class PlayerController : MonoBehaviour
         cameraRight.Normalize();
 
         _moveDirection = (cameraForward * movementInput.y + cameraRight * movementInput.x).normalized;
+    }
+
+    private void SetCanJumpInAir(float duration)
+    {
+        _canJumpInAirDuration = duration;
+        StartCoroutine(AirJumpCoroutine());
+    }
+
+    private IEnumerator AirJumpCoroutine()
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < _canJumpInAirDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        _canJumpInAirDuration = 0f;
     }
 
     void Move()
