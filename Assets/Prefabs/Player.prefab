@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fallDurationEventChannel: {fileID: 11400000, guid: aefc003346b00334ea1f662d217643f0, type: 2}
-  fallThreshold: 1
+  fallThreshold: 3
   damagePerSecond: 10
 --- !u!1 &4599488436340924790
 GameObject:

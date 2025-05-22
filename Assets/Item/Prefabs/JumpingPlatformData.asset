@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0718f53f4102e2a41a6d903293533aa0, type: 3}
-  m_Name: JumpObjectData
+  m_Name: JumpingPlatformData
   m_EditorClassIdentifier: 
   itemName: "\uC810\uD504\uB300"
   icon: {fileID: 0}

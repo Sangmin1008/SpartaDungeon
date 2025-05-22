@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02680549aeb78204aace56b225275800, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpObjectDataSo: {fileID: 11400000, guid: 45f3d98ed9b090c4d9c95770cea32920, type: 2}
+  jumpingPlatformDataSo: {fileID: 11400000, guid: 45f3d98ed9b090c4d9c95770cea32920, type: 2}
 --- !u!1 &4454846300704538309
 GameObject:
   m_ObjectHideFlags: 0

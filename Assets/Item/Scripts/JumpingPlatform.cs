@@ -2,10 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class JumpObject : MonoBehaviour
+public class JumpingPlatform : MonoBehaviour
 {
-    [SerializeField] private JumpObjectDataSO jumpObjectDataSo;
+    [SerializeField] private JumpingPlatformDataSO jumpingPlatformDataSo;
 
     private void OnCollisionEnter(Collision other)
     {
@@ -13,7 +14,7 @@ public class JumpObject : MonoBehaviour
         if (other.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             Rigidbody playerRb = other.collider.GetComponent<Rigidbody>();
-            playerRb.AddForce(Vector3.up * jumpObjectDataSo.jumpPower, ForceMode.Impulse);
+            playerRb.AddForce(Vector3.up * jumpingPlatformDataSo.jumpPower, ForceMode.Impulse);
         }
     }
 }
