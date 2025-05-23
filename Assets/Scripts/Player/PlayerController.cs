@@ -5,14 +5,19 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Physics")]
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private CapsuleCollider collider;
     [SerializeField] private Transform camera;
     
+    [Header("Move")]
     [SerializeField] private Vector2EventChannelSO moveEventChannel;
     [SerializeField] private float moveSpeed = 5f;
+    
+    [Header("Look")]
     [SerializeField] private float rotationSpeed = 10f;
 
+    [Header("Jump")]
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] private VoidEventChannelSO jumpEventChannel;
     [SerializeField] private BoolEventChannelSO jumpHeldEventChannel;
@@ -23,6 +28,10 @@ public class PlayerController : MonoBehaviour
     [Header("Gravity Tuning")]
     [SerializeField] private float fallMultiplier = 2.5f;
     [SerializeField] private float lowJumpMultiplier = 2f;
+    
+    [Header("Game Over")]
+    [SerializeField] private VoidEventChannelSO gameOverEventChannel;
+
 
     private Vector2 _currentMovementInput;
     private Vector3 _moveDirection;
@@ -60,6 +69,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (transform.position.y < -100f) Die();
         CalculateMoveDirection();
     }
 
@@ -176,5 +186,10 @@ public class PlayerController : MonoBehaviour
         {
             _rigidbody.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
         }
+    }
+
+    private void Die()
+    {
+        gameOverEventChannel.Raise();
     }
 }

@@ -8,6 +8,7 @@ public class PlayerStatHandler : MonoBehaviour, IDamageable
     [SerializeField] private StatDataSO baseStat;
     [SerializeField] private FloatEventChannelSO damageEventChannel;
     [SerializeField] private FloatEventChannelSO cureEventChannel;
+    [SerializeField] private VoidEventChannelSO gameOverEventChannel;
 
     private float _currentHealth;
     public float CurrentHealth
@@ -52,6 +53,6 @@ public class PlayerStatHandler : MonoBehaviour, IDamageable
 
     private void Die()
     {
-        Debug.Log("죽음!");
+        gameOverEventChannel.Raise();
     }
 }

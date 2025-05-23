@@ -27,7 +27,7 @@ public class UIConditionController : MonoBehaviour
         health.Subtract(amount);
     }
 
-    private void TakeHealing(float amount)
+    public void TakeHealing(float amount)
     {
         health.Add(amount);
     }
