@@ -20,6 +20,7 @@ public class FallDamageChecker : MonoBehaviour
         fallDurationEventChannel.OnEventRaised -= OnFallDurationReceived;
     }
 
+    // 공중에서 머물러있는 시간을 측정하고, 해당 값을 데미지로 변환하여 데미지 이벤트 호출
     private void OnFallDurationReceived(float airTime)
     {
         if (airTime > fallThreshold)

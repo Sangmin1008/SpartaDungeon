@@ -46,6 +46,7 @@ public class InputController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
+            // 상호작용중인 아이템이 없을 수 있기 때문에 null일 경우 무시
             interactEventChannel?.Raise();
         }
     }

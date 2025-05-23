@@ -31,12 +31,14 @@ public class CameraController : MonoBehaviour
         CameraRotation();
     }
 
+    // 마우스 입력을 이벤트 채널에서 받아옴
     private void OnLookInput(Vector2 delta)
     {
         _mouseX = delta.x;
         _mouseY = delta.y;
     }
 
+    // 카메라 회전
     private void CameraRotation()
     {
         _angle += _mouseX * mouseSensitivity;
@@ -49,6 +51,7 @@ public class CameraController : MonoBehaviour
         transform.rotation = Quaternion.Euler(_pitch, _angle, 0);
     }
     
+    // 각도 보정
     private float NormalizeAngle(float angle)
     {
         while (angle > 360)

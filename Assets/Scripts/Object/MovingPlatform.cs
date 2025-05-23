@@ -23,6 +23,7 @@ public class MovingPlatform : MonoBehaviour
         MovePlatform();
     }
 
+    // 플랫폼을 waypoint마다 이동시킴
     private void MovePlatform()
     {
         Vector3 targetPos = waypoints[_currentTargetIndex].position;
@@ -44,6 +45,7 @@ public class MovingPlatform : MonoBehaviour
         }
     }
 
+    // 플레이어가 플랫폼에서 떨어지지 않도록, 접촉할 경우 부모-자식 관계를 세팅
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Player"))

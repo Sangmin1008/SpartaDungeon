@@ -45,7 +45,7 @@ public class PlayerStatHandler : MonoBehaviour, IDamageable
         }
     }
 
-    public void TakeHealing(float amount)
+    private void TakeHealing(float amount)
     {
         _currentHealth += amount;
         _currentHealth = Mathf.Min(baseStat.maxHealth, _currentHealth);

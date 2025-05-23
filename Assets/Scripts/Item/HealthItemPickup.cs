@@ -25,6 +25,7 @@ public class HealthItemPickup : MonoBehaviour, IInteractable
         return $"{itemDataSo.itemName}\n{itemDataSo.description}\nPress the 'E' key";
     }
 
+    // 인터랙트 실행되면 회복 이벤트 발생
     public void OnInteract()
     {
         cureEventChannel.Raise(itemDataSo.hpValue);

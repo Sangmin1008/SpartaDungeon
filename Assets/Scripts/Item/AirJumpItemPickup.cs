@@ -24,6 +24,7 @@ public class AirJumpItemPickup : MonoBehaviour, IInteractable
         return $"{airJumpItemDataSo.name}\n{airJumpItemDataSo.description}\nPress the 'E' key";
     }
 
+    // 인터랙트 실행되면 공중점프 이벤트 발생
     public void OnInteract()
     {
         jumpInAirEventChannel.Raise(airJumpItemDataSo.airJumpDuration);

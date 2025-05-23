@@ -73,11 +73,13 @@ public class PlayerController : MonoBehaviour
         CalculateMoveDirection();
     }
 
+    // 움직임 정보를 받아옴
     private void OnMoveInput(Vector2 input)
     {
         _currentMovementInput = input;
     }
 
+    // 땅에 붙어있거나, 공중 점프가 가능할 경우에만 점프 정보를 받아옴
     private void OnJumpInput()
     {
         if (_isGrounded || _canJumpInAirDuration > 0f)
@@ -90,11 +92,13 @@ public class PlayerController : MonoBehaviour
         }
     }
     
+    // 점프키를 누르고 있는지 판단
     private void OnJumpHeldChanged(bool isHeld)
     {
         _isJumpHeld = isHeld;
     }
 
+    // 카메라가 보고있는 방향을 통해 움직임 방향 벡터 계산
     void CalculateMoveDirection()
     {
         Vector2 movementInput = _currentMovementInput;
@@ -110,12 +114,14 @@ public class PlayerController : MonoBehaviour
         _moveDirection = (cameraForward * movementInput.y + cameraRight * movementInput.x).normalized;
     }
 
+    // 공중 점프가 가능한 시간을 받아와서 코루틴 실행
     private void SetCanJumpInAir(float duration)
     {
         _canJumpInAirDuration = duration;
         StartCoroutine(AirJumpCoroutine());
     }
 
+    // 일정 시간동안 공중 점프를 가능하게 하는 코루틴
     private IEnumerator AirJumpCoroutine()
     {
         float elapsedTime = 0f;
@@ -146,6 +152,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // 착지 상태를 지속적으로 검사하여 떨어지는 시간도 함께 계산
     void CheckGround()
     {
         _isGrounded = IsGrounded();
@@ -173,9 +180,12 @@ public class PlayerController : MonoBehaviour
         Vector3 point1 = new Vector3(center.x, bottomY + epsilon, center.z);
         Vector3 point2 = new Vector3(center.x, bottomY - epsilon, center.z);
 
+        // CheckCapsule 방식으로 지상에 붙어있는지 검사
         return Physics.CheckCapsule(point1, point2, collider.radius, groundLayerMask);
     }
     
+    // 좀 더 자연스러운 낙하를 구현
+    // 낙하 전까지 점프를 계속 누르고 있으면 좀 더 높게 활공
     private void ApplyExtraGravity()
     {
         if (_rigidbody.velocity.y < 0)
