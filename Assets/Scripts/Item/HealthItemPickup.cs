@@ -22,7 +22,7 @@ public class HealthItemPickup : MonoBehaviour, IInteractable
 
     public string GetInteractPrompt()
     {
-        return $"{itemDataSo.itemName}\n{itemDataSo.description}";
+        return $"{itemDataSo.itemName}\n{itemDataSo.description}\nPress the 'E' key";
     }
 
     public void OnInteract()

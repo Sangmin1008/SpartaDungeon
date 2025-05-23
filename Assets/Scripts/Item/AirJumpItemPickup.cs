@@ -21,7 +21,7 @@ public class AirJumpItemPickup : MonoBehaviour, IInteractable
     
     public string GetInteractPrompt()
     {
-        return $"{airJumpItemDataSo.name}\n{airJumpItemDataSo.description}";
+        return $"{airJumpItemDataSo.name}\n{airJumpItemDataSo.description}\nPress the 'E' key";
     }
 
     public void OnInteract()
