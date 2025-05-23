@@ -2,18 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private Vector2EventChannelSO lookEventChannel;
     [SerializeField] private float mouseSensitivity = 1.5f;
     [SerializeField] private Transform player;
+    [SerializeField] private Vector3 offset = new Vector3(0, 0.6f, 0);
     
-    private Vector3 _offset = new Vector3(0, 0.6f, 0);
     private float _mouseX = 0f;
     private float _mouseY = 0f;
-    private float _angle = 0f; // 좌우 회전 각도 (요)
-    private float _pitch = 0f; // 상하 회전 각도 (피치)
+    private float _angle = 0f;
+    private float _pitch = 0f;
 
     private void OnEnable()
     {
@@ -44,7 +45,7 @@ public class CameraController : MonoBehaviour
 
         _angle = NormalizeAngle(_angle);
 
-        transform.position = player.position + _offset;
+        transform.position = player.position + offset;
         transform.rotation = Quaternion.Euler(_pitch, _angle, 0);
     }
     
